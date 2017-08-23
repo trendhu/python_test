@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        
+        .box{
+            width: 360px;
+            height: 300px;
+            text-align: center;
+            position: relative;
+            margin: 100px auto;
+            border: 1px solid red;
+        }
+
+        .person{
+            position: absolute;
+            width: 180px;
+            height: 300px;
+            background-image: url("images/charector.png");
+            /*背景重复次数    no-repeat表示不重复*/
+            background-repeat: no-repeat;
+            /*动画重复次数    infinite  表示无限的*/
+            animation-iteration-count: infinite;
+            animation-timing-function: step-start;
+            animation-name: personAnimation;
+            animation-duration: 1s;
+        }
+
+        @keyframes personAnimation {
+            0%{
+                background-position: 0 0;
+            }
+            14.3%{
+                background-position: -180px 0;
+            }
+            28.6%{
+                background-position: -360px 0;
+            }
+            42.9%{
+                background-position: -540px 0;
+            }
+            57.2%{
+                background-position: -720px 0;
+            }
+            71.5%{
+                background-position: -900px 0;
+            }
+            85.8%{
+                background-position: -1080px 0;
+            }
+            100%{
+                background-position: 0 0;
+            }
+            
+        }
+
+
+
+    </style>
+
+
+
+
+
+</head>
+<body>
+    <div class="box">
+        <div class="person">
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .content {
+            border: 1px solid red;
+            width: 800px;
+            height: 810px;
+            margin: 0 auto;
+            border-radius: 30px;
+            /*position: relative;*/
+            background-color: lightblue;
+        }
+
+        .content img:nth-child(1){
+            top:0px;
+        }
+
+        .content img:nth-child(2){
+            top:200px;
+        }
+
+        .content img:nth-child(3){
+            top:400px;
+        }
+
+        .content img:nth-child(4){
+            top:600px;
+        }
+
+
+        div img{
+            width: 100px;
+            height: 200px;
+            position: absolute;
+            transition: all 5s;
+
+            transform-origin: center;
+            
+
+        }
+/*
+        .content:hover img:nth-child(1){
+            transform:  rotate(360deg);
+            margin-left: 600px;
+        }
+
+        .content:hover img:nth-child(2){
+            transform:  rotate(180deg);
+            margin-left: 600px;
+        }
+
+        .content:hover img:nth-child(3){
+            transform:  rotate(720deg);
+            margin-left: 600px;
+        }
+*/
+
+        .content:hover img:nth-child(n){
+            transform:  rotate(8940deg) ;
+            margin-left: 600px;
+        }
+
+        
+
+    </style>
+
+</head>
+<body>
+    <div class="content">
+        <img src="images/02.png" alt="">
+        
+        <img src="images/02.png" alt="">
+        
+        <img src="images/02.png" alt="">
+        
+        <img src="images/02.png" alt="">
+    </div>
+</body>
+</html>

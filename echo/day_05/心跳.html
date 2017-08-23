@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+        .heart{
+            width: 200px;
+            height: 180px;
+            position: relative;
+            animation: heart 2s ease-in 0s infinite;
+        }
+
+        .heart::before , .heart::after{
+            position: absolute;
+            content: "";
+            left: 100px;
+            top: 0;
+            width: 100px;
+            height: 160px;
+            background-color: red;
+            border-radius: 50px 50px 0 0;
+            transform-origin: 0 100%;
+            transform: rotate(-45deg);
+        }
+
+        .heart::after{
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes heart {
+            0%{
+                transform: scale(0.3 , 0.3);  
+            }
+            20%{
+                transform: scale(0.5 , 0.5);
+            }
+            40%{
+                transform: scale(0.7 , 0.7);
+            }
+            50%{
+              transform: scale(1 , 1);  
+            }
+            60%{
+                transform: scale(0.7 , 0.7);
+            }
+            80%{
+                transform: scale(0.5 , 0.5);
+            }
+            100%{
+                transform: scale(0.3 , 0.3);
+            }
+        }
+
+
+
+        
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="heart">
+
+
+    </div>
+
+    
+
+    <p>wo shi duanluo </p>
+
+    <a href="http://www.baidu.com">百度</a>
+</body>
+</html>

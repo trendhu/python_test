@@ -1,0 +1,52 @@
+$def with(todos, form)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #w{
+            border: 1px solid red;
+        }
+    </style>
+
+</head>
+<body>
+    <table id="w">
+        <tr>
+            <th>what you need to do ?</th>
+            <th></th>
+        </tr>
+    $for todo in todos:
+        <tr>
+            <td>$todo.id</td>
+            <td>
+                <form  action="/del/$todo.id" method="post">
+                    <input type="text"  readonly value="$todo.title">
+                    <input style="border-radius:10px; border:1px;" type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <form action="" method="post">
+    $:form.render()
+        
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

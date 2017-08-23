@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #wrap{
+            width: 400px;
+            height: 200px;
+            position: relative;
+            border: 1px solid red;
+        }
+
+        #child{
+            width: 50px;
+            height: 50px;
+
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: green;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div  id="child"></div>
+    </div>
+</body>
+
+<script>
+    var wrap = document.getElementById("wrap");
+    var child = document.getElementById("child");
+
+    var maxWidth = wrap.clientWidth - child.offsetWidth;
+    var maxHeight = wrap.clientHeight - child.offsetHeight;
+
+
+    var left = child.offsetLeft;
+    var t = child.offsetTop;
+
+    var speedX = 2;
+    var speedY = 5;
+
+    setInterval(function () {
+        left += speedX;
+        t += speedY;
+
+        if(left >= maxWidth) {
+            // left -= speedX;
+            speedX *= -1;
+        } else if(left <= 0) {
+            speedX *= -1;
+        }
+
+        if(t >= maxHeight) {
+            speedY *= -1;
+        } else if(t <= 0) {
+            speedY *= -1;
+        }
+
+        child.style.left = left + "px";
+        child.style.top = t + "px";
+    } , 10);
+
+
+</script>
+</html>

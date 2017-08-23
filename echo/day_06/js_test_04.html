@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style type="text/css">
+        #box{
+            width: 600px;
+            height: 300px;
+            margin: 0 auto;
+            border: 2px solid red;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #wrap{
+            width: 600px;
+            position: absolute;
+            /*bottom: 0;  距离底部高度为0*/
+            bottom: 0;
+            /*border: 1px solid blue;  */    
+        }
+
+        .row{
+            position: absolute;
+        }
+
+        .row div{
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+
+            box-sizing: border-box;
+            float: left;
+            background-color: lightsalmon;
+
+            transition: all 3s;
+
+            /*使用-webkit-transform: 而不是 transform:  的原因是由于兼容性问题
+            对于旋转，各个浏览器之间是有一定不同的，为了更好的显示效果，故而选择此语句*/
+            -webkit-transform: translate(0, 0) rotate(0deg);
+            opacity: 1;
+
+        }
+
+        #score{
+            text-align: center;
+            font-size: 50px;
+            color: darkorange;
+        }
+
+        .row div.remove{
+            -webkit-transform: translate(0, 100px) rotate(360deg);
+            opacity: 0;
+        }
+
+
+        #fraction {
+            text-align: center;
+            font-size: 50px;
+            color: red;
+            position: absolute;
+            width: 100%;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div id="fraction">0</div>
+    <div id="box" class="box">
+        <div id="wrap"></div>
+    </div>
+</body>
+
+<script>
+    var wrap = document.getElementById("wrap");
+    var dox = document.getElementById("box");
+    var score = document.getElementById("fraction");
+    
+    var rowNumber =20;
+    var pieceWidth = 20;
+    var b = 0;
+    var direction = true;
+    var time = 500;
+    var rowStart = 0;
+
+    function createRow(){
+        /**
+        for 20
+            创建20个小的div
+            将每一个小的div 放进 row中
+        **/
+        var row = document.createElement("div");
+        row.style.width = pieceWidth * rowNumber +"px";
+        row.style.bottom = b + "px";
+        row.style.leftc = rowStart + "px";
+        row.className = "row";
+        for( var i = 0; i < rowNumber; i++){
+            var pieceDiv = document.createElement("div");
+            row.appendChild(pieceDiv);
+        }
+        wrap.appendChild(row);
+
+
+        var maxWidth = wrap.clientWidth - row.offsetWidth;
+        row.timer = setInterval(function(){
+            if(direction){
+                rowStart += pieceWidth;
+                if(rowStart >= maxWidth){
+                    direction =false;
+                }
+            }else{
+                rowStart -= pieceWidth;
+                if(rowStart <= 0){
+                    direction = true;
+                }
+            }
+            row.style.left = rowStart + "px";
+        }, time);
+        return row;
+    }
+
+    createRow();
+   // clearInterval(row.timer);
+
+   var isClick = false;
+    //鼠标点击事件
+    box.onclick = function(){
+        if(isClick){
+            return;
+        }
+        isClick = true;
+
+        setTimeout(function(){
+            isClick = false;
+        },2000);
+        score.innerHTML++;
+        //time -= 50;
+
+
+        if(time > 100){
+            time -= 50;
+        }
+        /**if(time <= 100){
+            time = 100;
+        }
+        **/
+
+        b += 20;
+
+        if(b > 200) {
+            wrap.style.bottom = -(b - 200) + "px";
+        }
+
+        // 回去正在移动的一行. wrap 中的最后一个孩子
+        var nowRow = wrap.lastElementChild;
+
+        var oldRow = nowRow.previousElementSibling;
+
+        var different = 0;
+        if(oldRow != null){
+            different = nowRow.offsetLeft - oldRow.offsetLeft;
+        } else {
+            different = 0;
+        }
+
+       // console.log("diffreent" + different);
+       // console.log("pieceWidth" + pieceWidth)
+
+        var removeNumber = different / pieceWidth;
+
+        //console.log(removeNumber)
+
+        rowNumber -= Math.abs(removeNumber);
+
+        if(rowNumber <= 0){
+            alert("Game Over!!!")
+            clearInterval(nowRow.timer)
+            return;
+        }
+
+        //孩子数量
+        var piceNumber = nowRow.children;
+
+
+        if(removeNumber > 0 ){
+
+            for(var i = 0; i < removeNumber; i++){
+                var removeObj = nowRow.children[piceNumber.length-i-1];
+                removeObj.className = "remove";
+            }
+            setTimeout(function(){
+                for(var i = 0; i < removeNumber; i++){
+                    nowRow.removeChild(nowRow.lastElementChild);
+                }
+            },1000);
+        } else {
+            removeNumber = Math.abs(removeNumber);
+
+            for(var i = 0; i < removeNumber; i++){
+                var removeObj = nowRow.children[i];
+                removeObj.className = "remove";
+            }
+            var lastLeft = nowRow.offsetLeft;
+
+            setTimeout(function(){
+                for(var i = 0; i < removeNumber; i++){
+                    nowRow.removeChild(nowRow.firstElementChild);
+                }
+
+                nowRow.style.left = lastLeft + removeNumber * 20 + "px";
+
+            },3000);
+        }
+        var row = createRow();
+        
+        oldRow = row.previousElementSibling;
+        if(oldRow != null){
+            clearInterval(oldRow.timer);
+        }
+    }
+
+</script>
+</html>

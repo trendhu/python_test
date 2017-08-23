@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style></style>
+</head>
+<body>
+    
+    <progress id="myProgress" value="1" max="100">50%</progress>
+
+
+</body>
+
+<script>
+    
+    var  myProgress = document.getElementById("myProgress");
+    
+    var progressValue = 1;
+    
+    function myTimer(){
+        progressValue++;
+        if(progressValue >= 100){
+            progressValue = 0;
+        }
+
+        myProgress.value = progressValue;
+    }
+
+    
+
+
+    setInterval(function () {
+        myTimer();
+    } , 10);
+    
+
+
+</script>
+
+</html>
